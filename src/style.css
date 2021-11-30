@@ -125,11 +125,16 @@ input[type="submit"] {
   justify-content: center;
 }
 
-.padding-bottom {
+.padding-top-bottom {
   padding-bottom: 30px;
+  padding-top: 30px;
 }
 
-.padding-top {
+.extra-padding-top {
+  padding-top: 30px;
+}
+
+.extra-padding-bottom {
   padding-top: 30px;
 }
 
