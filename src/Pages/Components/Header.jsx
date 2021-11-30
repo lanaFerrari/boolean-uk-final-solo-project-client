@@ -1,4 +1,3 @@
-import { useState } from "react";
 import logo from "../../Images/logo.jpg";
 
 export default function Header() {
