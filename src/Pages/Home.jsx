@@ -14,8 +14,13 @@ export default function Home() {
           variant="outlined"
           aria-label="outlined button group"
         >
-          <Button onClick="/login">Login</Button>
-          <Button onClick="/sign-up">Sign Up</Button>
+          <a href="/login">
+            <Button>Login</Button>
+          </a>
+          <a href="/sign-up">
+            {" "}
+            <Button>Sign Up</Button>
+          </a>
         </ButtonGroup>
       </div>
       <div className="align-center">
