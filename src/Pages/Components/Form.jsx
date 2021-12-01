@@ -68,10 +68,11 @@ export default function Form({
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                  required
                   fullWidth
-                  id="name"
+                  id="username"
                   label="User name *"
-                  name="name"
+                  name="username"
                   value={userName}
                   onChange={handleOnChange}
                 />
