@@ -71,7 +71,7 @@ export default function Form({
                   required
                   fullWidth
                   id="username"
-                  label="User name *"
+                  label="User name"
                   name="username"
                   value={userName}
                   onChange={handleOnChange}
