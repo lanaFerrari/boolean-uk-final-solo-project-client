@@ -15,13 +15,13 @@ export default function Home() {
           variant="outlined"
           aria-label="outlined button group"
         >
-          <Link href="/login">
+          <a href="/login">
             <Button>Login</Button>
-          </Link>
-          <Link href="/sign-up">
+          </a>
+          <a href="/sign-up">
             {" "}
             <Button>Sign Up</Button>
-          </Link>
+          </a>
         </ButtonGroup>
       </div>
       <div className="align-center">

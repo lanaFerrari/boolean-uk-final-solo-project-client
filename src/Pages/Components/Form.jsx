@@ -111,13 +111,11 @@ export default function Form({
             <Grid container justifyContent="flex-end">
               <Grid item>
                 {action === "Login" ? (
-                  <Link href="/sign-up" variant="body2">
-                    Don't have an account? Sign Up
-                  </Link>
+                  <a href="/sign-up">Don't have an account? Sign Up</a>
                 ) : (
-                  <Link href="/login" variant="body2">
+                  <a href="/login" variant="body2">
                     Already have an account? Login
-                  </Link>
+                  </a>
                 )}
               </Grid>
             </Grid>
