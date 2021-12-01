@@ -1,4 +1,5 @@
 import { Button, ButtonGroup } from "@mui/material";
+import { Link } from "react-router-dom";
 import board from "../Images/board.png";
 
 export default function Home() {
@@ -14,13 +15,13 @@ export default function Home() {
           variant="outlined"
           aria-label="outlined button group"
         >
-          <a href="/login">
+          <Link href="/login">
             <Button>Login</Button>
-          </a>
-          <a href="/sign-up">
+          </Link>
+          <Link href="/sign-up">
             {" "}
             <Button>Sign Up</Button>
-          </a>
+          </Link>
         </ButtonGroup>
       </div>
       <div className="align-center">
