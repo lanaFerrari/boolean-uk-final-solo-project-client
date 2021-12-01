@@ -15,10 +15,10 @@ export default function Home() {
           variant="outlined"
           aria-label="outlined button group"
         >
-          <Link href="/login">
+          <Link to="/login">
             <Button>Login</Button>
           </Link>
-          <Link href="/sign-up">
+          <Link to="/sign-up">
             {" "}
             <Button>Sign Up</Button>
           </Link>

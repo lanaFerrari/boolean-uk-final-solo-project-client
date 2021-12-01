@@ -12,6 +12,8 @@ function App() {
 
   const [authenticatedUser, setAuthenticatedUser] = useState("");
 
+  console.log("Auth user", authenticatedUser);
+
   const handleOnChange = (e) => {
     setUserName(e.target.value);
     setPassword(e.target.value);
@@ -51,24 +53,26 @@ function App() {
   const handleSignUp = (e) => {
     e.preventDefault();
 
-    // const fetchOptions = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ userName, password }),
-    // };
+    const score = 0;
 
-    // fetch("http://localhost:3030/sign-up", fetchOptions)
-    //   .then((res) => res.json())
-    //   .catch(console.log)
-    //   .then((user) => {
-    //     if (user) {
-    //       setAuthenticatedUser(user);
+    const fetchOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userName, password, score }),
+    };
 
-    //       localStorage.setItem("user", JSON.stringify(user));
-    //     }
-    //   });
+    fetch("http://localhost:3030/auth/sign-up", fetchOptions)
+      .then((res) => res.json())
+      .catch(console.log)
+      .then((user) => {
+        if (user) {
+          setAuthenticatedUser(user);
+
+          // localStorage.setItem("user", JSON.stringify(user));
+        }
+      });
   };
 
   return (
