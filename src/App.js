@@ -9,10 +9,11 @@ function App() {
   const [action, setAction] = useState("Login");
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
+  const [profile, setProfile] = useState(null);
+  console.log("profile", profile);
 
   const [authenticatedUser, setAuthenticatedUser] = useState("");
-
-  console.log("Auth user", authenticatedUser);
+  console.log("Auth", authenticatedUser);
 
   const handleOnChange = (e) => {
     setUserName(e.target.value);
@@ -22,32 +23,31 @@ function App() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // const fetchOptions = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ userName, password }),
-    // };
+    const fetchOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userName, password }),
+    };
 
-    // fetch("http://localhost:3030/login", fetchOptions)
-    //   .then((res) => {
-    //     if (!res.ok) {
-    //       throw Error(`[${res.status} ERROR]`);
-    //     }
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     console.log("DATA", data.token);
-    //     const token = data.token;
+    fetch("http://localhost:3030/auth/login", fetchOptions)
+      .then((res) => {
+        if (!res.ok) {
+          throw Error(`[${res.status} ERROR]`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        const token = data.token;
 
-    //     if (token) {
-    //       setAuthenticatedUser(token);
+        if (token) {
+          setAuthenticatedUser(token);
 
-    //       localStorage.setItem("Token", token);
-    //     }
-    //   })
-    //   .catch((error) => console.error({ error }));
+          localStorage.setItem("Token", token);
+        }
+      })
+      .catch((error) => console.error({ error }));
   };
 
   const handleSignUp = (e) => {
@@ -70,10 +70,35 @@ function App() {
         if (user) {
           setAuthenticatedUser(user);
 
-          // localStorage.setItem("user", JSON.stringify(user));
+          localStorage.setItem("user", JSON.stringify(user));
         }
       });
   };
+
+  function getProfile() {
+    const token = localStorage.getItem("Token");
+    console.log("Token", token);
+
+    const fetchOptions = {
+      method: "GET",
+      headers: {
+        authorization: token,
+      },
+    };
+
+    fetch(`http://localhost:3030/users/profile`, fetchOptions)
+      .then((res) => res.json())
+      .then((data) => {
+        setProfile(data.profile);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  useEffect(() => {
+    getProfile();
+  }, [authenticatedUser]);
 
   return (
     <div className="centering">
