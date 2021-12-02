@@ -4,6 +4,7 @@ import "./style.css";
 import Header from "./Pages/Components/Header";
 import Home from "./Pages/Home";
 import Form from "./Pages/Components/Form";
+import Room from "./Pages/Room";
 const { apiUrl } = require("./utils/constants");
 
 function App() {
@@ -135,6 +136,9 @@ function App() {
             password={password}
             userName={userName}
           />
+        </Route>
+        <Route exact path="/game-room">
+          <Room />
         </Route>
       </Switch>
     </div>
