@@ -4,12 +4,14 @@ import "./style.css";
 import Header from "./Pages/Components/Header";
 import Home from "./Pages/Home";
 import Form from "./Pages/Components/Form";
+const { apiUrl } = require("./utils/constants");
 
 function App() {
   const [action, setAction] = useState("Login");
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
   const [profile, setProfile] = useState(null);
+
   console.log("profile", profile);
 
   const [authenticatedUser, setAuthenticatedUser] = useState("");
@@ -31,7 +33,7 @@ function App() {
       body: JSON.stringify({ userName, password }),
     };
 
-    fetch("http://localhost:3030/auth/login", fetchOptions)
+    fetch(`${apiUrl}/auth/login`, fetchOptions)
       .then((res) => {
         if (!res.ok) {
           throw Error(`[${res.status} ERROR]`);
@@ -63,7 +65,7 @@ function App() {
       body: JSON.stringify({ userName, password, score }),
     };
 
-    fetch("http://localhost:3030/auth/sign-up", fetchOptions)
+    fetch(`${apiUrl}/auth/sign-up`, fetchOptions)
       .then((res) => res.json())
       .catch(console.log)
       .then((token) => {
@@ -86,7 +88,7 @@ function App() {
       },
     };
 
-    fetch(`http://localhost:3030/users/profile`, fetchOptions)
+    fetch(`${apiUrl}/users/profile`, fetchOptions)
       .then((res) => res.json())
       .then((data) => {
         setProfile(data.profile);
@@ -117,6 +119,15 @@ function App() {
           />
         </Route>
         <Route exact path="/login">
+          <Form
+            handleSubmit={handleLogin}
+            handleOnChange={handleOnChange}
+            action={action}
+            password={password}
+            userName={userName}
+          />
+        </Route>
+        <Route exact path="/user">
           <Form
             handleSubmit={handleLogin}
             handleOnChange={handleOnChange}
