@@ -66,11 +66,11 @@ function App() {
     fetch("http://localhost:3030/auth/sign-up", fetchOptions)
       .then((res) => res.json())
       .catch(console.log)
-      .then((user) => {
-        if (user) {
-          setAuthenticatedUser(user);
+      .then((token) => {
+        if (token) {
+          setAuthenticatedUser(token);
 
-          localStorage.setItem("user", JSON.stringify(user));
+          localStorage.setItem("user", JSON.stringify(token));
         }
       });
   };
@@ -98,7 +98,7 @@ function App() {
 
   useEffect(() => {
     getProfile();
-  }, [authenticatedUser]);
+  }, []);
 
   return (
     <div className="centering">
