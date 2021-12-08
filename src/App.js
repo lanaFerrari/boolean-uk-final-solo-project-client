@@ -5,6 +5,7 @@ import Header from "./Pages/Components/Header";
 import Home from "./Pages/Home";
 import Form from "./Pages/Components/Form";
 import Room from "./Pages/Room";
+import UserHome from "./Pages/UserHome";
 const { apiUrl } = require("./utils/constants");
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
   const [profile, setProfile] = useState(null);
+  const [gameToJoin, setGameToJoin] = useState(null);
+  const [listOfGames, setListOFGames] = useState([]);
 
   console.log("profile", profile);
 
@@ -92,7 +95,7 @@ function App() {
     fetch(`${apiUrl}/users/profile`, fetchOptions)
       .then((res) => res.json())
       .then((data) => {
-        setProfile(data.profile);
+        setProfile(data.userWithGames);
       })
       .catch((error) => {
         console.error(error);
@@ -137,8 +140,11 @@ function App() {
             userName={userName}
           />
         </Route>
-        <Route exact path="/game-room">
+        <Route exact path="/game-room/:id">
           <Room />
+        </Route>
+        <Route exact path="/user/:id">
+          <UserHome profile={profile} />
         </Route>
       </Switch>
     </div>
