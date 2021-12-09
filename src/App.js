@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./style.css";
 import Header from "./Pages/Components/Header";
 import Home from "./Pages/Home";
 import Form from "./Pages/Components/Form";
+import Room from "./Pages/Room";
+import UserHome from "./Pages/UserHome";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 const { apiUrl } = require("./utils/constants");
 
 function App() {
+  const navigate = useNavigate();
+
   const [action, setAction] = useState("Login");
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
-  const [profile, setProfile] = useState(null);
-
-  console.log("profile", profile);
-
   const [authenticatedUser, setAuthenticatedUser] = useState("");
   console.log("Auth", authenticatedUser);
 
@@ -44,9 +46,13 @@ function App() {
         const token = data.token;
 
         if (token) {
-          setAuthenticatedUser(token);
+          const user = jwtDecode(token);
+          console.log(user);
+          setAuthenticatedUser(user);
 
           localStorage.setItem("Token", token);
+
+          navigate(`/user/${user.id}`);
         }
       })
       .catch((error) => console.error({ error }));
@@ -68,75 +74,73 @@ function App() {
     fetch(`${apiUrl}/auth/sign-up`, fetchOptions)
       .then((res) => res.json())
       .catch(console.log)
-      .then((token) => {
+      .then((data) => {
+        console.log("DATA", data);
+        const token = data.token;
         if (token) {
-          setAuthenticatedUser(token);
+          const user = jwtDecode(token);
+          console.log(user);
+          setAuthenticatedUser(user);
 
-          localStorage.setItem("user", JSON.stringify(token));
+          localStorage.setItem("Token", token);
+
+          navigate(`/user/${user.id}`);
         }
       });
   };
 
-  function getProfile() {
-    const token = localStorage.getItem("Token");
-    console.log("Token", token);
-
-    const fetchOptions = {
-      method: "GET",
-      headers: {
-        authorization: token,
-      },
-    };
-
-    fetch(`${apiUrl}/users/profile`, fetchOptions)
-      .then((res) => res.json())
-      .then((data) => {
-        setProfile(data.profile);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  useEffect(() => {
-    getProfile();
-  }, []);
-
   return (
     <div className="centering">
       <Header />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/sign-up">
-          <Form
-            handleSubmit={handleSignUp}
-            handleOnChange={handleOnChange}
-            password={password}
-            userName={userName}
-            action="Sign-up"
-          />
-        </Route>
-        <Route exact path="/login">
-          <Form
-            handleSubmit={handleLogin}
-            handleOnChange={handleOnChange}
-            action={action}
-            password={password}
-            userName={userName}
-          />
-        </Route>
-        <Route exact path="/user">
-          <Form
-            handleSubmit={handleLogin}
-            handleOnChange={handleOnChange}
-            action={action}
-            password={password}
-            userName={userName}
-          />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+
+        <Route
+          exact
+          path="/sign-up"
+          element={
+            <Form
+              handleSubmit={handleSignUp}
+              handleOnChange={handleOnChange}
+              password={password}
+              userName={userName}
+              action="Sign-up"
+            />
+          }
+        />
+
+        <Route
+          exact
+          path="/login"
+          element={
+            <Form
+              handleSubmit={handleLogin}
+              handleOnChange={handleOnChange}
+              action={action}
+              password={password}
+              userName={userName}
+            />
+          }
+        />
+
+        <Route
+          exact
+          path="/user"
+          element={
+            <Form
+              handleSubmit={handleLogin}
+              handleOnChange={handleOnChange}
+              action={action}
+              password={password}
+              userName={userName}
+            />
+          }
+        />
+
+        <Route exact path="/game-room/:id" element={<Room />} />
+
+        <Route exact path="/user/:id" element={<UserHome />} />
+      </Routes>
     </div>
   );
 }
