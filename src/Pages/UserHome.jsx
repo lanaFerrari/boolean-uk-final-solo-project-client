@@ -12,9 +12,6 @@ export default function UserHome() {
 
   const token = localStorage.getItem("Token");
 
-  console.log("Token", token);
-  console.log("profile", profile);
-
   function checkStatus(game) {
     return game.status === "start";
   }
@@ -72,7 +69,6 @@ export default function UserHome() {
     fetch(`${apiUrl}/games`, fetchOptions)
       .then((res) => res.json())
       .then((game) => {
-        console.log("Data inside handle Create Game", game);
         const newGame = game.id;
 
         navigate(`/game-room/${newGame}`);
@@ -93,7 +89,6 @@ export default function UserHome() {
     fetch(`${apiUrl}/games/${id}/join`, fetchOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log("Data JOIN", data);
         navigate(`/game-room/${id}`);
       })
       .catch((error) => {

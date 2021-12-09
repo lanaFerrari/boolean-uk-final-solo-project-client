@@ -8,8 +8,6 @@ export default function Room() {
   const [playerOne, setPlayerOne] = useState(null);
   const [playerTwo, setPlayerTwo] = useState(null);
   const [game, setGame] = useState({});
-  console.log("Play 1", playerOne);
-  console.log("Play 2", playerTwo);
 
   function getGameWithUsers() {
     const fetchOptions = {
@@ -33,7 +31,7 @@ export default function Room() {
 
   useEffect(() => {
     getGameWithUsers();
-  }, []);
+  }, [token, gameId]);
 
   return (
     <main>

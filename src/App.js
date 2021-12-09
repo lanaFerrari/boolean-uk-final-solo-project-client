@@ -17,7 +17,6 @@ function App() {
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
   const [authenticatedUser, setAuthenticatedUser] = useState("");
-  console.log("Auth", authenticatedUser);
 
   const handleOnChange = (e) => {
     setUserName(e.target.value);
@@ -79,7 +78,7 @@ function App() {
         const token = data.token;
         if (token) {
           const user = jwtDecode(token);
-          console.log(user);
+
           setAuthenticatedUser(user);
 
           localStorage.setItem("Token", token);
