@@ -4,5 +4,9 @@ export default function Room() {
   //Player one create a game in Room
   //Display list of active games (in Home) and create button join
 
-  return <main></main>;
+  return (
+    <main>
+      <p>Game Room</p>
+    </main>
+  );
 }

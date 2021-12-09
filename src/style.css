@@ -80,6 +80,17 @@ input[type="submit"] {
   font-size: 18px;
   background-color: white;
 }
+
+hr {
+  display: block;
+  margin-before: 0.5em;
+  margin-after: 0.5em;
+  margin-start: auto;
+  margin-end: auto;
+  overflow: hidden;
+  border-style: inset;
+  border-width: 1px;
+}
 /* Colours and styles*/
 
 .boolean-blue {
@@ -189,6 +200,7 @@ input[type="submit"] {
 .gap {
   padding-left: 0.3rem;
 }
+
 /* Grids */
 
 .three-c-grid {
