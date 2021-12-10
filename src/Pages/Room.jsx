@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { apiUrl } from "../utils/constants";
+import BoardGame from "./Components/BoardGame";
 
 export default function Room() {
   const gameId = useParams();
@@ -46,6 +47,9 @@ export default function Room() {
           Player 2:{" "}
           {playerTwo ? playerTwo.userName : "Player hasn't entered the room"}
         </p>
+      </div>
+      <div>
+        <BoardGame />
       </div>
     </main>
   );
