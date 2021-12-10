@@ -10,6 +10,15 @@ export default function BoardGame() {
 
   const [board, setBoard] = useState(initialBoard);
 
+  function createPiece(square, y, x) {
+    return (
+      <div
+        className={`piece ${
+          square !== null && (square === "red" ? "red-piece" : "black-piece")
+        }`}
+      ></div>
+    );
+  }
   return (
     <div className="centering">
       <div className="board">
@@ -25,7 +34,9 @@ export default function BoardGame() {
                     className={`square ${
                       (x + y) % 2 === 0 ? "square-white" : "square-black"
                     }`}
-                  ></div>
+                  >
+                    {square && createPiece(square, y, x)}
+                  </div>
                 );
               })}
             </div>
