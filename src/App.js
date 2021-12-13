@@ -17,6 +17,7 @@ function App() {
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
   const [authenticatedUser, setAuthenticatedUser] = useState("");
+  console.log(userName, password);
 
   const handleOnChange = (e) => {
     setUserName(e.target.value);
@@ -42,6 +43,7 @@ function App() {
         return res.json();
       })
       .then((data) => {
+        console.log("DATA", data);
         const token = data.token;
 
         if (token) {
