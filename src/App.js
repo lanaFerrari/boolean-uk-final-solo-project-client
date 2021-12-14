@@ -43,7 +43,6 @@ function App() {
         return res.json();
       })
       .then((data) => {
-        console.log("DATA", data);
         const token = data.token;
 
         if (token) {
