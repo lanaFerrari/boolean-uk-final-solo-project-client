@@ -17,7 +17,6 @@ function App() {
   const [userName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
   const [authenticatedUser, setAuthenticatedUser] = useState("");
-  console.log(userName, password);
 
   const handleOnChange = (e) => {
     setUserName(e.target.value);
