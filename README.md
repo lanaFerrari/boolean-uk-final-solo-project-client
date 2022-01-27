@@ -1,4 +1,22 @@
-# Getting Started with Create React App
+# Checkers game
+
+Website created to exercise authorization (ursing Bcrypt and Token) and logic.
+
+## Deployed app
+https://boolean-checkers-web.herokuapp.com/
+
+## Server side
+https://github.com/lanaFerrari/boolean-uk-final-solo-project-server
+
+## Tech
+- Javascript
+- React
+- Node.js
+- Npm
+- Heroku
+- Prisma
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
